@@ -21,10 +21,8 @@ module Api
 
       respond_to do |format|
         if @flag.save
-          format.html { redirect_to @flag, notice: 'Flag was successfully created.' }
-          format.json { render :show, status: :created, location: @flag }
+          format.json { render :show, status: :created }
         else
-          format.html { render :new }
           format.json { render json: @flag.errors, status: :unprocessable_entity }
         end
       end
@@ -33,10 +31,8 @@ module Api
     def update
       respond_to do |format|
         if @flag.update(flag_params)
-          format.html { redirect_to @flag, notice: 'Flag was successfully updated.' }
-          format.json { render :show, status: :ok, location: @flag }
+          format.json { render :show, status: :ok }
         else
-          format.html { render :edit }
           format.json { render json: @flag.errors, status: :unprocessable_entity }
         end
       end
@@ -45,7 +41,6 @@ module Api
     def destroy
       @flag.destroy
       respond_to do |format|
-        format.html { redirect_to flags_url, notice: 'Flag was successfully destroyed.' }
         format.json { head :no_content }
       end
     end
@@ -57,7 +52,7 @@ module Api
     end
 
     def flag_params
-      params.fetch(:flag, {})
+      params.fetch(:flag, {}).permit(:content)
     end
   end
 end
