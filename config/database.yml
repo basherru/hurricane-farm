@@ -1,0 +1,18 @@
+default: &default
+  adapter: postgresql
+  database: hurricane-farm_production
+  encoding: unicode
+  username: <%= ENV['DATABASE_ROOT_USERNAME'] %>
+  password: <%= ENV['DATABASE_ROOT_PASSWORD'] %>
+  host: <%= ENV['DATABASE_HOST'] %>
+  port: <%= ENV['DATABASE_PORT'] %>
+
+development:
+  <<: *default
+  database: hurricane-farm_development
+  pool: 10
+
+test:
+  <<: *default
+  database: hurricane-farm_test
+  pool: 5
