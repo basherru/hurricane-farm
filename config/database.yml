@@ -2,10 +2,10 @@ default: &default
   adapter: postgresql
   database: hurricane-farm_production
   encoding: unicode
-  username: <%= ENV['DATABASE_ROOT_USERNAME'] %>
-  password: <%= ENV['DATABASE_ROOT_PASSWORD'] %>
-  host: <%= ENV['DATABASE_HOST'] %>
-  port: <%= ENV['DATABASE_PORT'] %>
+  username: <%= ENV.fetch('DATABASE_ROOT_USERNAME') %>
+  password: <%= ENV.fetch('DATABASE_ROOT_PASSWORD') %>
+  host: <%= ENV.fetch('DATABASE_HOST') %>
+  port: <%= ENV.fetch('DATABASE_PORT') %>
 
 development:
   <<: *default

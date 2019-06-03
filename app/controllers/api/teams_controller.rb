@@ -1,19 +1,12 @@
 module Api
   class TeamsController < ApiController
-    before_action :set_team, only: [:show, :edit, :update, :destroy]
+    before_action :set_team, only: [:show, :update, :destroy]
 
     def index
       @teams = Team.all
     end
 
     def show
-    end
-
-    def new
-      @team = Team.new
-    end
-
-    def edit
     end
 
     def create
@@ -52,7 +45,7 @@ module Api
     end
 
     def team_params
-      params.fetch(:team, {})
+      params.fetch(:team, {}).permit(:host, :title, :status)
     end
   end
 end

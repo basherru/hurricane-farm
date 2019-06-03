@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 2019_06_03_183008) do
     t.string "source", null: false
     t.integer "period", default: 30, null: false
     t.integer "timeout", default: 30, null: false
-    t.string "state", default: "initial", null: false
+    t.integer "status", default: 0, null: false
     t.string "title", default: "unnamed", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -35,7 +35,7 @@ ActiveRecord::Schema.define(version: 2019_06_03_183008) do
     t.string "content", null: false
     t.bigint "team_id"
     t.bigint "exploit_id"
-    t.string "status", default: "initial", null: false
+    t.integer "status", default: 0, null: false
     t.float "pts", default: 0.0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -48,7 +48,7 @@ ActiveRecord::Schema.define(version: 2019_06_03_183008) do
   create_table "teams", force: :cascade do |t|
     t.string "title", default: "unnamed", null: false
     t.string "host", null: false
-    t.string "status", default: "active", null: false
+    t.integer "status", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

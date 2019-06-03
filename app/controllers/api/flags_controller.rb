@@ -1,19 +1,9 @@
 module Api
   class FlagsController < ApiController
-    before_action :set_flag, only: [:show, :edit, :update, :destroy]
+    before_action :set_flag, only: [:show]
 
     def index
       @flags = Flag.all
-    end
-
-    def show
-    end
-
-    def new
-      @flag = Flag.new
-    end
-
-    def edit
     end
 
     def create
@@ -25,23 +15,6 @@ module Api
         else
           format.json { render json: @flag.errors, status: :unprocessable_entity }
         end
-      end
-    end
-
-    def update
-      respond_to do |format|
-        if @flag.update(flag_params)
-          format.json { render :show, status: :ok }
-        else
-          format.json { render json: @flag.errors, status: :unprocessable_entity }
-        end
-      end
-    end
-
-    def destroy
-      @flag.destroy
-      respond_to do |format|
-        format.json { head :no_content }
       end
     end
 

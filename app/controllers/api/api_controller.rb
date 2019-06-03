@@ -6,7 +6,7 @@ module Api
     private
 
     def authenticate_request
-      head :unauthorized unless request.headers['HTTP_API_KEY'] == ENV['API_KEY']
+      head :unauthorized unless request.headers['HTTP_API_KEY'] == ENV.fetch('API_KEY')
     end
   end
 end
