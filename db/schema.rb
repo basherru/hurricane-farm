@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 2019_06_03_183008) do
     t.integer "period", default: 30, null: false
     t.integer "timeout", default: 30, null: false
     t.integer "status", default: 0, null: false
-    t.string "title", default: "unnamed", null: false
+    t.string "title", default: "Unknown", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -46,7 +46,7 @@ ActiveRecord::Schema.define(version: 2019_06_03_183008) do
   end
 
   create_table "teams", force: :cascade do |t|
-    t.string "title", default: "unnamed", null: false
+    t.string "title", default: "Unknown", null: false
     t.string "host", null: false
     t.integer "status", default: 0, null: false
     t.datetime "created_at", null: false

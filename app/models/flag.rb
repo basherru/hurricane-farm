@@ -5,5 +5,5 @@ class Flag < ApplicationRecord
   validates :content, :pts, presence: true
   validates :content, uniqueness: true
 
-  enum status: %i[initial enqueued posted]
+  enum status: %i[initial enqueued already_posted too_old our_own accepted]
 end

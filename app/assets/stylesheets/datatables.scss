@@ -1,0 +1,12 @@
+@import 'datatables/dataTables.foundation';
+@import 'datatables/extensions/Responsive/responsive.foundation';
+@import 'datatables/extensions/Buttons/buttons.dataTables';
+
+.page-link {
+  color: #343a40;
+}
+
+.page-item.active .page-link {
+  background-color: #343a40;
+  border-color: #343a40;
+}

@@ -1,1 +1,5 @@
-|LOGGED IN!!!
+section class="m-5"
+  div class="card text-center"
+    div class="card-body"
+      h5 class="card-title" Temporal Teams Statistics
+      = line_chart Team.all.map {|team| {name: team.title || "Unknown", data: team.flags.group_by_minute(:created_at).count}}

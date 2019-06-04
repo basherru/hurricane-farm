@@ -75,3 +75,11 @@ gem "bootstrap", "~> 4.3"
 gem "jquery-rails", "~> 4.3"
 
 gem "slim", "~> 4.0"
+
+gem "rails-timeago", "~> 2.17"
+
+gem "jquery-datatables", "~> 1.10"
+
+gem "chartkick", "~> 3.1"
+
+gem "groupdate", "~> 4.1"
