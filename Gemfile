@@ -69,3 +69,9 @@ gem "rufus-scheduler", "~> 3.6"
 
 gem 'dotenv-rails', '~> 2.7.2', groups: [:development, :test]
 gem "socketry", "~> 0.5.1"
+
+gem "bootstrap", "~> 4.3"
+
+gem "jquery-rails", "~> 4.3"
+
+gem "slim", "~> 4.0"
