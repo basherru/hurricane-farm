@@ -7,6 +7,7 @@ class TeamDatatable < AjaxDatatablesRails::ActiveRecord
       id:        { source: "Team.id" },
       title:     { source: "Team.title" },
       host:      { source: "Team.host" },
+      exploits:  { orderable: false, searchable: false },
       flags:     { orderable: false, searchable: false },
       points:    { orderable: false, searchable: false },
       status:    { source: "Team.status" },
@@ -20,6 +21,7 @@ class TeamDatatable < AjaxDatatablesRails::ActiveRecord
         id:        record.id,
         title:     record.title,
         host:      record.host,
+        exploits:  exploits_map(record),
         flags:     line_chart(flags_chart_data(record)),
         points:    line_chart(points_chart_data(record)),
         status:    record.status,
@@ -44,5 +46,15 @@ class TeamDatatable < AjaxDatatablesRails::ActiveRecord
       .group_by_minutes(1, aggregation: { type: :sum, field: :pts }, where_clause: { team_id: record.id })
       .first(10)
       .to_h
+  end
+
+  def exploits_map(record)
+    Exploit.order('id ASC').map do |exploit|
+      if record.exploits.include?(exploit)
+        1
+      else
+        0
+      end
+    end
   end
 end

@@ -37,6 +37,7 @@ class TeamsController < ApplicationController
     @team = Team.new(team_params)
 
     if @team.save
+      sync_exploits
       respond_to do |format|
         format.html { redirect_to teams_path }
       end
@@ -49,6 +50,7 @@ class TeamsController < ApplicationController
   # PATCH/PUT /teams/1.json
   def update
     if @team.update(team_params)
+      sync_exploits
       respond_to do |format|
         format.html { redirect_to teams_path }
       end
@@ -72,8 +74,15 @@ class TeamsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def team_params
-      _team_params = params.fetch(:team, {}).permit(:host, :title, :status)
+      _team_params = params.fetch(:team, {}).permit(:host, :title, :status, :exploit_ids => [])
       _team_params[:status] = _team_params[:status] == 'active' ? 1 : 0
       _team_params
+    end
+
+    def sync_exploits
+      @team.exploits = []
+      team_params[:exploit_ids].filter(&:present?).each do |id|
+        @team.exploits << Exploit.find(id)
+      end
     end
 end

@@ -8,6 +8,7 @@ section class="m-5"
         th scope="col" Title
         th scope="col" Host
         th scope="col" Active
+        th scope="col" Exploits
         th scope="col" Flags Graph
         th scope="col" Points Gained
         th scope="col" Edit Link
@@ -31,6 +32,10 @@ javascript:
         data: "status",
         render: data => `<img src="https://icongr.am/material/${data === 'active' ? 'check' : 'close'}.svg" />`
       },
+      {
+        data: "exploits",
+        render: data => JSON.parse(data).map(val => `<img src="https://icongr.am/material/chevron-${val === 1 ? 'up' : 'down'}.svg" />`).join('')
+      },
       { data: "flags", orderable: false, searchable: false },
       { data: "points", orderable: false, searchable: false },
       {
@@ -42,7 +47,7 @@ javascript:
     ],
     columnDefs: [
       {
-        targets: [0, 1, 2, 3, 4, 5, 6],
+        targets: [0, 1, 2, 3, 4, 5, 6, 7],
         className: 'text-center align-middle'
       }
     ],

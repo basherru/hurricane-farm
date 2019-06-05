@@ -16,6 +16,11 @@ div class="modal-dialog" role="document"
           div class="form-group"
             = f.label :status, 'Status'
             = f.select :status, Team.statuses.keys.map { |w| [w.humanize, w] }, {}, { class: 'form-control' }
+            div class="mt-4"
+              = collection_check_boxes :team, :exploit_ids, Exploit.all, :id, :title do |section|
+                div class="form-check"
+                  = section.check_box class: 'form-check-input'
+                  = section.label class: 'form-check-label'
         div class="modal-footer"
           = f.submit 'Save', class: 'btn btn-primary'
           button type="button" class="btn btn-secondary" data-dismiss="modal" Close
