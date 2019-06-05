@@ -12,28 +12,25 @@ section class="m-5"
     tbody
 
 javascript:
-  if (!document.flagsTable) {
-    $(document).on('turbolinks:load', () => {
-      document.flagsTable = $('#flags-datatable').DataTable({
-        processing: true,
-        serverSide: true,
-        ajax: {
-          url: $('#flags-datatable').data('source')
-        },
-        stateSave: true,
-        buttons: ['refresh'],
-        pagingType: 'full_numbers',
-        columns: [
-          {"data": "id"},
-          {"data": "created_at"},
-          {"data": "team"},
-          {"data": "exploit"},
-          {"data": "content"},
-          {"data": "status"},
-          {"data": "pts"},
-        ],
-        order: [0, 'desc'],
-        initComplete: () => document.flagsTable.buttons().container().prependTo($('.col-md-6:eq(1)'))
-      });
-    });
-  }
+  const tableSelector = '#flags-datatable';
+  const table = $(tableSelector).DataTable({
+    processing: true,
+    serverSide: true,
+    ajax: {
+      url: $(tableSelector).data('source')
+    },
+    stateSave: true,
+    buttons: ['refresh'],
+    pagingType: 'full_numbers',
+    columns: [
+      {"data": "id"},
+      {"data": "created_at"},
+      {"data": "team"},
+      {"data": "exploit"},
+      {"data": "content"},
+      {"data": "status"},
+      {"data": "pts"},
+    ],
+    order: [0, 'desc'],
+    initComplete: () => table.buttons().container().prependTo($('.col-md-6:eq(1)'))
+  });
