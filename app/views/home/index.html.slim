@@ -1,21 +1,15 @@
 section class="m-5"
-  div class="mt-3 mb-3"
-    div class="card text-center"
-      div class="card-body"
-        h5 class="card-title" Temporal Teams Statistics (Flags)
-        = line_chart @temporal_teams_flags_data, legend: :bottom
-  div class="mt-3 mb-3"
-    div class="card text-center"
-      div class="card-body"
-        h5 class="card-title" Temporal Exploits Statistics (Flags)
-        = line_chart @temporal_exploits_flags_data, legend: :bottom
-  div class="mt-3 mb-3"
-    div class="card text-center"
-      div class="card-body"
-        h5 class="card-title" Temporal Teams Statistics (Points)
-        = line_chart @temporal_teams_points_data, legend: :bottom
+  - @charts[:line_charts].each do |chart|
     div class="mt-3 mb-3"
       div class="card text-center"
         div class="card-body"
-          h5 class="card-title" Temporal Exploits Statistics (Points)
-          = line_chart @temporal_exploits_points_data, legend: :bottom
+          h5 class="card-title" = chart[:title]
+          = line_chart chart[:data], legend: :bottom
+  - @charts[:pie_charts].each_slice(2) do |chart_group|
+    div class="mt-3 mb-3"
+      div class="card-deck"
+        - chart_group.each do |chart|
+          div class="card text-center"
+            div class="card-body"
+              h5 class="card-title" = chart[:title]
+              = pie_chart chart[:data], legend: :left

@@ -6,7 +6,7 @@ class Team < ApplicationRecord
 
   enum status: %i[active inactive]
 
-  scope :temporal_statistics_flags, ->() do
+  scope :temporal_flags, ->() do
     all.sort_by { |team| -team.flags.count }
       .first(10)
       .map do |team|
@@ -17,8 +17,8 @@ class Team < ApplicationRecord
       end
   end
 
-  scope :temporal_statistics_points, ->() do
-    all.sort_by { |team| -team.flags.map(&:pts).inject(:+) }
+  scope :temporal_points, ->() do
+    all.sort_by { |team| -team.flags.map(&:pts).reduce(0, :+) }
       .first(10)
       .map do |team|
         {
@@ -26,5 +26,13 @@ class Team < ApplicationRecord
           data: Flag.group_by_minutes(10, aggregation: { type: :sum, field: :pts }, where_clause: { team_id: team.id }).first(10).to_h
         }
       end
+  end
+
+  scope :flags_partition, ->() do
+    Flag.joins(:team).group(:title).order('count(1) desc').count.first(10).to_h
+  end
+
+  scope :points_partition, ->() do
+    Flag.joins(:team).group(:title).order('sum(pts) desc').sum(:pts).first(10).to_h
   end
 end

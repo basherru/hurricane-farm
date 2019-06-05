@@ -4,7 +4,10 @@ class FlagsController < UiController
   # GET /flags
   # GET /flags.json
   def index
-    @flags = Flag.all
+    respond_to do |format|
+      format.html
+      format.json { render json: FlagDatatable.new(params) }
+    end
   end
 
   # GET /flags/1

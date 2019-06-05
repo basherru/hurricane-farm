@@ -10,3 +10,11 @@
 //= require datatables/extensions/Buttons/buttons.html5
 //= require datatables/extensions/Buttons/buttons.print
 //= require datatables/extensions/Buttons/buttons.bootstrap4
+
+$.fn.dataTable.ext.buttons.refresh = {
+  text: 'Refresh',
+  action: (_, dt) => {
+    dt.clear().draw();
+    dt.ajax.reload();
+  }
+};

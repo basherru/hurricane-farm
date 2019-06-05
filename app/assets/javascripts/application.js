@@ -15,7 +15,6 @@
 //= require jquery3
 //= require popper
 //= require bootstrap-sprockets
-//= require rails-timeago
 //= require datatables
 //= require chartkick
 //= require Chart.bundle

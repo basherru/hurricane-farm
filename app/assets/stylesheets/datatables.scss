@@ -2,11 +2,13 @@
 @import 'datatables/extensions/Responsive/responsive.foundation';
 @import 'datatables/extensions/Buttons/buttons.dataTables';
 
+$background-color: #343a40;
+
 .page-link {
-  color: #343a40;
+  color: $background-color;
 }
 
-.page-item.active .page-link {
-  background-color: #343a40;
-  border-color: #343a40;
+.page-item.active .page-link, .dt-buttons > .btn-secondary {
+  background-color: $background-color;
+  border-color: $background-color;
 }
