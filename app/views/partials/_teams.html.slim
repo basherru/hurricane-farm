@@ -1,0 +1,51 @@
+section class="m-5"
+  = render 'teams/new'
+  = render 'teams/edit'
+  table id="teams-datatable" class="table table-striped table-bordered"
+    thead
+      tr
+        th scope="col" ID
+        th scope="col" Title
+        th scope="col" Host
+        th scope="col" Active
+        th scope="col" Flags Graph
+        th scope="col" Points Gained
+        th scope="col" Edit Link
+    tbody
+
+javascript:
+  const tableSelector = '#teams-datatable';
+  const table = $(tableSelector).DataTable({
+    processing: true,
+    serverSide: true,
+    ajax: {
+      url: $(tableSelector).data('source')
+    },
+    buttons: ['refresh'],
+    pagingType: 'full_numbers',
+    columns: [
+      { data: "id" },
+      { data: "title" },
+      { data: "host" },
+      {
+        data: "status",
+        render: data => `<img src="https://icongr.am/material/${data === 'active' ? 'check' : 'close'}.svg" />`
+      },
+      { data: "flags", orderable: false, searchable: false },
+      { data: "points", orderable: false, searchable: false },
+      {
+        data: "edit_link",
+        render: data => `<a href="${data}" data-remote="true" data-toggle="modal" data-target="#edit-modal"><img src="https://icongr.am/material/account-edit.svg" /></a>`,
+        orderable: false,
+        searchable: false
+      }
+    ],
+    columnDefs: [
+      {
+        targets: [0, 1, 2, 3, 4, 5, 6],
+        className: 'text-center align-middle'
+      }
+    ],
+    order: [0, 'asc'],
+    initComplete: () => table.buttons().container().prependTo($('.col-md-6:eq(1)'))
+  });

@@ -1,0 +1,50 @@
+class TeamDatatable < AjaxDatatablesRails::ActiveRecord
+  include Chartkick::Helper
+  include Rails.application.routes.url_helpers
+
+  def view_columns
+    @view_columns ||= {
+      id:        { source: "Team.id" },
+      title:     { source: "Team.title" },
+      host:      { source: "Team.host" },
+      flags:     { orderable: false, searchable: false },
+      points:    { orderable: false, searchable: false },
+      status:    { source: "Team.status" },
+      edit_link: { orderable: false, searchable: false }
+    }
+  end
+
+  def data
+    records.map do |record|
+      {
+        id:        record.id,
+        title:     record.title,
+        host:      record.host,
+        flags:     line_chart(flags_chart_data(record)),
+        points:    line_chart(points_chart_data(record)),
+        status:    record.status,
+        edit_link: edit_team_path(record)
+      }
+    end
+  end
+
+  def get_raw_records
+    Team
+  end
+
+  def flags_chart_data(record)
+    record
+      .flags
+      .group_by_minutes(1, aggregation: { type: :count, field: '1' })
+      .first(10)
+      .to_h
+  end
+
+  def points_chart_data(record)
+    record
+      .flags
+      .group_by_minutes(1, aggregation: { type: :sum, field: :pts })
+      .first(10)
+      .to_h
+  end
+end

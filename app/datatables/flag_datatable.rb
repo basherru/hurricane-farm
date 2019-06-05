@@ -7,7 +7,7 @@ class FlagDatatable < AjaxDatatablesRails::ActiveRecord
       created_at: { source: "Flag.created_at" },
       team:       { source: "Flag.team_id" },
       exploit:    { source: "Flag.exploit_id" },
-      content:    { source: "Flag.content" },
+      content:    { source: "Flag.content", orderable: false, searchable: false },
       status:     { source: "Flag.status" },
       pts:        { source: "Flag.pts" },
 
@@ -31,5 +31,4 @@ class FlagDatatable < AjaxDatatablesRails::ActiveRecord
   def get_raw_records
     Flag.all
   end
-
 end

@@ -1,0 +1,21 @@
+div class="modal-dialog" role="document"
+  div class="modal-content"
+    div class="m-3"
+      = form_for @team do |f|
+        div class="modal-header"
+          h5 class="modal-title" Edit Team
+          button type="button" class="close" data-dismiss="modal"
+            span aria-hidden="true">&times;
+        div class="modal-body"
+          div class="form-group"
+            = f.label :title, 'Title'
+            = f.text_field :title, class: 'form-control'
+          div class="form-group"
+            = f.label :host, 'Host'
+            = f.text_field :host, class: 'form-control'
+          div class="form-group"
+            = f.label :status, 'Status'
+            = f.select :status, Team.statuses.keys.map { |w| [w.humanize, w] }, {}, { class: 'form-control' }
+        div class="modal-footer"
+          = f.submit 'Save', class: 'btn btn-primary'
+          button type="button" class="btn btn-secondary" data-dismiss="modal" Close

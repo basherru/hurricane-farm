@@ -4,7 +4,10 @@ class TeamsController < ApplicationController
   # GET /teams
   # GET /teams.json
   def index
-    @teams = Team.all
+    respond_to do |format|
+      format.html
+      format.json { render json: TeamDatatable.new(params) }
+    end
   end
 
   # GET /teams/1
@@ -14,11 +17,18 @@ class TeamsController < ApplicationController
 
   # GET /teams/new
   def new
-    @team = Team.new
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   # GET /teams/1/edit
   def edit
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   # POST /teams
@@ -26,28 +36,24 @@ class TeamsController < ApplicationController
   def create
     @team = Team.new(team_params)
 
-    respond_to do |format|
-      if @team.save
-        format.html { redirect_to @team, notice: 'Team was successfully created.' }
-        format.json { render :show, status: :created, location: @team }
-      else
-        format.html { render :new }
-        format.json { render json: @team.errors, status: :unprocessable_entity }
+    if @team.save
+      respond_to do |format|
+        format.html { redirect_to teams_path }
       end
+    else
+      head :unprocessable_entity
     end
   end
 
   # PATCH/PUT /teams/1
   # PATCH/PUT /teams/1.json
   def update
-    respond_to do |format|
-      if @team.update(team_params)
-        format.html { redirect_to @team, notice: 'Team was successfully updated.' }
-        format.json { render :show, status: :ok, location: @team }
-      else
-        format.html { render :edit }
-        format.json { render json: @team.errors, status: :unprocessable_entity }
+    if @team.update(team_params)
+      respond_to do |format|
+        format.html { redirect_to teams_path }
       end
+    else
+      head :unprocessable_entity
     end
   end
 
@@ -55,10 +61,7 @@ class TeamsController < ApplicationController
   # DELETE /teams/1.json
   def destroy
     @team.destroy
-    respond_to do |format|
-      format.html { redirect_to teams_url, notice: 'Team was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    head :no_content
   end
 
   private
@@ -69,6 +72,8 @@ class TeamsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def team_params
-      params.fetch(:team, {}).permit(:host, :title, :status)
+      _team_params = params.fetch(:team, {}).permit(:host, :title, :status)
+      _team_params[:status] = _team_params[:status] == 'active' ? 1 : 0
+      _team_params
     end
 end
