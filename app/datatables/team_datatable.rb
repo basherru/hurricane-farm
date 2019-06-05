@@ -33,17 +33,15 @@ class TeamDatatable < AjaxDatatablesRails::ActiveRecord
   end
 
   def flags_chart_data(record)
-    record
-      .flags
-      .group_by_minutes(1, aggregation: { type: :count, field: '1' })
+    Flag
+      .group_by_minutes(1, aggregation: { type: :count, field: '1' }, where_clause: { team_id: record.id })
       .first(10)
       .to_h
   end
 
   def points_chart_data(record)
-    record
-      .flags
-      .group_by_minutes(1, aggregation: { type: :sum, field: :pts })
+    Flag
+      .group_by_minutes(1, aggregation: { type: :sum, field: :pts }, where_clause: { team_id: record.id })
       .first(10)
       .to_h
   end

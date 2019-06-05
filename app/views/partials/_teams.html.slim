@@ -47,5 +47,8 @@ javascript:
       }
     ],
     order: [0, 'asc'],
-    initComplete: () => table.buttons().container().prependTo($('.col-md-6:eq(1)'))
+    initComplete: () => {
+      table.buttons().container().prependTo($('.col-md-6:eq(1)'));
+      $(`<a href="/teams/new" data-remote="true" data-toggle="modal" data-target="#new-modal"><button class="btn btn-secondary" tabindex="0" aria-controls="teams-datatable" type="button"><span>New Team</span></button></a>`).prependTo($('.dt-buttons'));
+    }
   });
