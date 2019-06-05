@@ -12,14 +12,13 @@ section class="m-5"
     tbody
 
 javascript:
-  const tableSelector = '#flags-datatable';
-  if (!$.fn.dataTable.isDataTable(tableSelector)) {
+  if (!document.flagsTable) {
     $(document).on('turbolinks:load', () => {
-      document.table = $(tableSelector).DataTable({
+      document.flagsTable = $('#flags-datatable').DataTable({
         processing: true,
         serverSide: true,
         ajax: {
-          url: $(tableSelector).data('source')
+          url: $('#flags-datatable').data('source')
         },
         stateSave: true,
         buttons: ['refresh'],
@@ -34,7 +33,7 @@ javascript:
           {"data": "pts"},
         ],
         order: [0, 'desc'],
-        initComplete: () => document.table.buttons().container().prependTo($('.col-md-6:eq(1)'))
+        initComplete: () => document.flagsTable.buttons().container().prependTo($('.col-md-6:eq(1)'))
       });
     });
   }
