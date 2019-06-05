@@ -22,7 +22,7 @@ class ApplicationRecord < ActiveRecord::Base
         end
       }
       GROUP BY timestamp
-      ORDER BY timestamp ASC;
+      ORDER BY timestamp DESC;
     SQL
     ActiveRecord::Base.connection
       .execute(query)

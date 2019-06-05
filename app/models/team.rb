@@ -12,7 +12,7 @@ class Team < ApplicationRecord
       .map do |team|
         {
           name: team.title || "Unknown",
-          data: Flag.group_by_minutes(10, aggregation: { type: :count, field: '1' }, where_clause: { team_id: team.id })
+          data: Flag.group_by_minutes(10, aggregation: { type: :count, field: '1' }, where_clause: { team_id: team.id }).first(10).to_h
         }
       end
   end
@@ -23,7 +23,7 @@ class Team < ApplicationRecord
       .map do |team|
         {
           name: team.title || "Unknown",
-          data: Flag.group_by_minutes(10, aggregation: { type: :sum, field: :pts }, where_clause: { team_id: team.id })
+          data: Flag.group_by_minutes(10, aggregation: { type: :sum, field: :pts }, where_clause: { team_id: team.id }).first(10).to_h
         }
       end
   end
