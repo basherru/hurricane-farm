@@ -12,27 +12,29 @@ section class="m-5"
     tbody
 
 javascript:
-  $(document).on('turbolinks:load', () => {
-    const tableSelector = '#flags-datatable';
-    const table = $(tableSelector).DataTable({
-      processing: true,
-      serverSide: true,
-      ajax: {
-        url: $(tableSelector).data('source')
-      },
-      buttons: ['refresh'],
-      pagingType: 'full_numbers',
-      columns: [
-        {"data": "id"},
-        {"data": "created_at"},
-        {"data": "team"},
-        {"data": "exploit"},
-        {"data": "content"},
-        {"data": "status"},
-        {"data": "pts"},
-      ],
-      order: [0, 'desc'],
-      initComplete: () => table.buttons().container().prependTo($('.col-md-6:eq(1)', table.table().container()))
+  const tableSelector = '#flags-datatable';
+  if (!$.fn.dataTable.isDataTable(tableSelector)) {
+    $(document).on('turbolinks:load', () => {
+      document.table = $(tableSelector).DataTable({
+        processing: true,
+        serverSide: true,
+        ajax: {
+          url: $(tableSelector).data('source')
+        },
+        stateSave: true,
+        buttons: ['refresh'],
+        pagingType: 'full_numbers',
+        columns: [
+          {"data": "id"},
+          {"data": "created_at"},
+          {"data": "team"},
+          {"data": "exploit"},
+          {"data": "content"},
+          {"data": "status"},
+          {"data": "pts"},
+        ],
+        order: [0, 'desc'],
+        initComplete: () => document.table.buttons().container().prependTo($('.col-md-6:eq(1)', document.table.table().container()))
+      });
     });
-    document.on('turbolinks:before-cache', table.destroy.bind(this));
-  });
+  }

@@ -12,7 +12,7 @@
 //= require datatables/extensions/Buttons/buttons.bootstrap4
 
 $.fn.dataTable.ext.buttons.refresh = {
-  text: 'Refresh',
+  text: 'Force Refresh',
   action: (_, dt) => {
     dt.clear().draw();
     dt.ajax.reload();
