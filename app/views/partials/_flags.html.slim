@@ -1,0 +1,38 @@
+section class="m-5"
+  table id="flags-datatable" class="table table-striped table-bordered"
+    thead
+      tr
+        th scope="col" ID
+        th scope="col" Created At
+        th scope="col" Team
+        th scope="col" Exploit
+        th scope="col" Content
+        th scope="col" Status
+        th scope="col" Points
+    tbody
+
+javascript:
+  $(document).on('turbolinks:load', () => {
+    const tableSelector = '#flags-datatable';
+    const table = $(tableSelector).DataTable({
+      processing: true,
+      serverSide: true,
+      ajax: {
+        url: $(tableSelector).data('source')
+      },
+      buttons: ['refresh'],
+      pagingType: 'full_numbers',
+      columns: [
+        {"data": "id"},
+        {"data": "created_at"},
+        {"data": "team"},
+        {"data": "exploit"},
+        {"data": "content"},
+        {"data": "status"},
+        {"data": "pts"},
+      ],
+      order: [0, 'desc'],
+      initComplete: () => table.buttons().container().prependTo($('.col-md-6:eq(1)', table.table().container()))
+    });
+    document.on('turbolinks:before-cache', table.destroy.bind(this));
+  });
