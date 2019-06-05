@@ -5,8 +5,8 @@ class FlagDatatable < AjaxDatatablesRails::ActiveRecord
     @view_columns ||= {
       id:         { source: "Flag.id" },
       created_at: { source: "Flag.created_at" },
-      team:       { source: "Flag.team" },
-      exploit:    { source: "Flag.exploit" },
+      team:       { source: "Flag.team_id" },
+      exploit:    { source: "Flag.exploit_id" },
       content:    { source: "Flag.content" },
       status:     { source: "Flag.status" },
       pts:        { source: "Flag.pts" },
