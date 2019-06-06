@@ -68,6 +68,7 @@ gem "colorize", "~> 0.8.1"
 gem "rufus-scheduler", "~> 3.6"
 
 gem 'dotenv-rails', '~> 2.7.2', groups: [:development, :test]
+
 gem "socketry", "~> 0.5.1"
 
 gem "bootstrap", "~> 4.3"
@@ -85,3 +86,5 @@ gem "groupdate", "~> 4.1"
 gem "ajax-datatables-rails", "~> 1.0"
 
 gem "codemirror-rails", "~> 5.16"
+
+gem "dry-configurable", "~> 0.8.3"

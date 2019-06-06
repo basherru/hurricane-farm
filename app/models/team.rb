@@ -4,7 +4,7 @@ class Team < ApplicationRecord
 
   validates :title, :host, presence: true
 
-  enum status: %i[inactive active]
+  enum status: %i[down up]
 
   scope :temporal_flags, ->() do
     all.sort_by { |team| -team.flags.count }

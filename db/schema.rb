@@ -28,7 +28,7 @@ ActiveRecord::Schema.define(version: 2019_06_03_183008) do
   create_table "exploits_teams", id: false, force: :cascade do |t|
     t.bigint "team_id", null: false
     t.bigint "exploit_id", null: false
-    t.index ["team_id", "exploit_id"], name: "index_exploits_teams_on_team_id_and_exploit_id"
+    t.index ["team_id", "exploit_id"], name: "index_exploits_teams_on_team_id_and_exploit_id", unique: true
   end
 
   create_table "flags", force: :cascade do |t|

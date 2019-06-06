@@ -75,7 +75,7 @@ class TeamsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def team_params
       _team_params = params.fetch(:team, {}).permit(:host, :title, :status, :exploit_ids => [])
-      _team_params[:status] = _team_params[:status] == 'active' ? 1 : 0
+      _team_params[:status] = _team_params[:status] == 'up' ? 1 : 0
       _team_params
     end
 
