@@ -18,4 +18,7 @@
 //= require datatables
 //= require chartkick
 //= require Chart.bundle
+//= require codemirror
+//= require codemirror/modes/ruby
+//= require codemirror/addons/display/autorefresh
 //= require_tree .

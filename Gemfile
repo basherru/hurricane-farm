@@ -83,3 +83,5 @@ gem "chartkick", "~> 3.1"
 gem "groupdate", "~> 4.1"
 
 gem "ajax-datatables-rails", "~> 1.0"
+
+gem "codemirror-rails", "~> 5.16"

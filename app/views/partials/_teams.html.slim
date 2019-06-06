@@ -34,7 +34,7 @@ javascript:
       },
       {
         data: "exploits",
-        render: data => JSON.parse(data).map(val => `<img src="https://icongr.am/material/chevron-${val === 1 ? 'up' : 'down'}.svg" />`).join('')
+        render: data => JSON.parse(data).map(val => `<img src="https://icongr.am/material/flash${val === 1 ? '' : '-off'}.svg?size=18" />`).join('')
       },
       { data: "flags", orderable: false, searchable: false },
       { data: "points", orderable: false, searchable: false },
