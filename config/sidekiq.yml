@@ -1,0 +1,4 @@
+:verbose: false
+:concurrency: 10
+:queues:
+  - ["exploits", 10]
