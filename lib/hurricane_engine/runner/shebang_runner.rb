@@ -28,6 +28,7 @@ module HurricaneEngine
           rescue PTY::ChildExited => _
             Rails.logger.info "Error #{exploit.title.green} for #{team.handle.red}"
           end
+        ensure
           File.delete(temp_file_name)
         end
       end

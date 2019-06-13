@@ -1,6 +1,6 @@
 class DashboardChartsService
   def self.data
-    charts = {
+    {
       line_charts: [
         {
           title: 'Temporal Teams Statistics (Flags)',
@@ -38,6 +38,5 @@ class DashboardChartsService
         }
       ]
     }
-    charts
   end
 end

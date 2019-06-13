@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_03_183008) do
+ActiveRecord::Schema.define(version: 2019_06_13_171437) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 2019_06_03_183008) do
     t.string "title", default: "Unknown", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "scheduler_handle"
   end
 
   create_table "exploits_teams", id: false, force: :cascade do |t|
