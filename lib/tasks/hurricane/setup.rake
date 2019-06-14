@@ -7,7 +7,7 @@ namespace :hurricane do
     teams_range       = eval ENV.fetch('TEAMS_RANGE')
     teams_range.each do |id|
       host = teams_host_format.sub('#', id.to_s)
-      Team.create(title: "Team-#{id}", host: host)
+      Team.create(title: "Team-#{id}", host: host, status: 1)
     end
   end
 end
