@@ -6,5 +6,6 @@ class Team < ApplicationRecord
 
   enum status: %i[down up]
 
-  include TeamChartsScopes
+  include Scopes::FlagsTemporal
+  include Scopes::FlagsPartition
 end

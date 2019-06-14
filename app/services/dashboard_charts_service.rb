@@ -1,42 +1,23 @@
 class DashboardChartsService
-  def self.data
-    {
-      line_charts: [
-        {
-          title: 'Temporal Teams Statistics (Flags)',
-          data:  Team.temporal_flags
-        },
-        {
-          title: 'Temporal Exploits Statistics (Flags)',
-          data:  Exploit.temporal_flags
-        },
-        {
-          title: 'Temporal Teams Statistics (Points)',
-          data:  Team.temporal_points
-        },
-        {
-          title: 'Temporal Exploits Statistics (Points)',
-          data:  Exploit.temporal_points
-        }
-      ],
-      pie_charts: [
-        {
-          title: 'Teams Statistics (Flags)',
-          data: Team.flags_partition
-        },
-        {
-          title: 'Exploits Statistics (Flags)',
-          data: Exploit.flags_partition
-        },
-        {
-          title: 'Teams Statistics (Points)',
-          data: Team.points_partition
-        },
-        {
-          title: 'Exploits Statistics (Points)',
-          data: Exploit.points_partition
-        }
-      ]
-    }
+  def self.call
+    data = { line_charts: [], pie_charts: [] }.with_indifferent_access
+
+    charts_types_strategy = { temporal: :line, partition: :pie }.with_indifferent_access
+
+    %w[temporal partition].each do |group_type|
+      %w[flags points].each do |measure|
+        %w[team exploit].each do |record|
+          strategy = charts_types_strategy[group_type]
+          bucket = "#{strategy}_charts"
+          container = {
+            title: "#{group_type.humanize} #{record.humanize}s Statistics (#{measure.humanize})",
+            data:  record.camelize.constantize.public_send("#{measure}_#{group_type}")
+          }
+          data[bucket] << container unless container[:data].empty?
+        end
+      end
+    end
+
+    data
   end
 end

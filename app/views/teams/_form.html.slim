@@ -1,9 +1,9 @@
 div class="modal-dialog" role="document"
   div class="modal-content"
     div class="m-3"
-      = form_for @team || Team.new do |f|
+      = form_for team || Team.new do |f|
         div class="modal-header"
-          h5 class="modal-title" = @team.presence ? 'Edit Team' : 'New Team'
+          h5 class="modal-title" = team.presence ? 'Edit Team' : 'New Team'
           button type="button" class="close" data-dismiss="modal"
             span aria-hidden="true">&times;
         div class="modal-body"

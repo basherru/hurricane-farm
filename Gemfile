@@ -48,6 +48,7 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'rubocop', require: false
 end
 
 group :test do
@@ -62,29 +63,20 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem "sidekiq", "~> 5.2"
-
-gem "colorize", "~> 0.8.1"
-
 gem "rufus-scheduler", "~> 3.6"
-
-gem 'dotenv-rails', '~> 2.7.2', groups: [:development, :test]
-
 gem "socketry", "~> 0.5.1"
 
 gem "bootstrap", "~> 4.3"
-
 gem "jquery-rails", "~> 4.3"
-
 gem "slim", "~> 4.0"
-
 gem "jquery-datatables", "~> 1.10"
-
 gem "chartkick", "~> 3.1"
-
 gem "groupdate", "~> 4.1"
-
 gem "ajax-datatables-rails", "~> 1.0"
-
 gem "codemirror-rails", "~> 5.16"
 
+gem "colorize", "~> 0.8.1"
+gem 'dotenv-rails', '~> 2.7.2', groups: [:development, :test]
 gem "dry-configurable", "~> 0.8.3"
+
+gem "rails_best_practices", "~> 1.19"

@@ -1,24 +1,34 @@
-# README
+# Hurricane Farm
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Application designed for automated exploits runs during Capture the Flag (CTF) competitions.
 
-Things you may want to cover:
+## Development setup:
 
-* Ruby version
+For starting with the project, please read [Development Setup](https://github.com/basherru/hurricane-farm/blob/master/DEVELOPMENT_SETUP.md) instructions.
 
-* System dependencies
+## Workflow & contributing:
 
-* Configuration
+Please read our [Contribution Guidelines](https://github.com/basherru/hurricane-farm/blob/master/CONTRIBUTION_GUIDELINES.md) and [Code of Conduct](https://github.com/basherru/hurricane-farm/blob/master/CODE_OF_CONDUCT.md).
 
-* Database creation
+## Everyday Gems & commands to run before pushing to origin:
 
-* Database initialization
+1. [Rails Best Practices](https://github.com/flyerhzm/rails_best_practices): is a code metric tool to check the quality of Rails code. Run:
+    ```bash
+    bundle exec rails_best_practices
+    ```
 
-* How to run the test suite
+    or
 
-* Services (job queues, cache servers, search engines, etc.)
+    ```bash
+    bundle exec rails_best_practices -f html
+    ```
 
-* Deployment instructions
+    (for HTML output)
 
-* ...
+2. [Rubocop](https://github.com/bbatsov/rubocop): a Ruby static code analyzer, based on the community Ruby style guide. Run:
+
+    ```bash
+    bundle exec rubocop
+    ```
+
+    to check your Ruby-files.
