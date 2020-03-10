@@ -20,18 +20,18 @@ class Charts::GetData < ApplicationService
     end
   end
 
-  def wrap(type, entity, metric)
+  def wrap(*args)
     {
-      title: title_template(type, entity, metric),
-      data: metric_value(type, entity, metric),
+      title: wrap_title(*args),
+      data: wrap_data(*args),
     }
   end
 
-  def title_template(type, entity, metric)
+  def wrap_title(type, entity, metric)
     "#{type.humanize} #{entity.humanize}s Statistics (#{metric.humanize})"
   end
 
-  def metric_value(type, entity, metric)
+  def wrap_data(type, entity, metric)
     metric_accessor_name = [metric, type].join("_")
 
     entity.camelize.constantize.public_send(metric_accessor_name)
