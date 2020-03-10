@@ -1,5 +1,5 @@
 class HomeController < UiController
   def index
-    @charts = DashboardChartsService.call
+    @charts = Charts::GetData.call
   end
 end
