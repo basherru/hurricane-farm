@@ -12,7 +12,7 @@
 # SupportedHashRocketStyles: key, separator, table
 # SupportedColonStyles: key, separator, table
 # SupportedLastArgumentHashStyles: always_inspect, always_ignore, ignore_implicit, ignore_explicit
-Layout/AlignHash:
+Layout/HashAlignment:
   Exclude:
     - 'app/datatables/exploit_datatable.rb'
     - 'app/datatables/flag_datatable.rb'
@@ -39,7 +39,7 @@ Layout/EmptyLinesAroundAccessModifier:
 # Configuration parameters: AllowForAlignment, AllowBeforeTrailingComments, ForceEqualSignAlignment.
 Layout/ExtraSpacing:
   Exclude:
-    - 'lib/hurricane_engine/runner/shebang_runner.rb'
+    - 'lib/hurricane_engine/runner/temporarily_executable.rb'
     - 'test/controllers/exploits_controller_test.rb'
     - 'test/controllers/flags_controller_test.rb'
     - 'test/controllers/teams_controller_test.rb'
@@ -76,7 +76,7 @@ Layout/MultilineMethodCallIndentation:
 # Configuration parameters: AllowForAlignment.
 Layout/SpaceAroundOperators:
   Exclude:
-    - 'lib/hurricane_engine/runner/shebang_runner.rb'
+    - 'lib/hurricane_engine/runner/temporarily_executable.rb'
 
 # Offense count: 6
 # Cop supports --auto-correct.
@@ -87,9 +87,9 @@ Layout/SpaceInsideHashLiteralBraces:
   EnforcedStyle: space
 
 # Offense count: 1
-Lint/HandleExceptions:
+Lint/SuppressedException:
   Exclude:
-    - 'lib/hurricane_engine/runner/shebang_runner.rb'
+    - 'lib/hurricane_engine/runner/temporarily_executable.rb'
 
 # Offense count: 2
 # Configuration parameters: AllowKeywordBlockArguments.
@@ -128,14 +128,7 @@ Naming/AccessorMethodName:
 # Configuration parameters: PreferredName.
 Naming/RescuedExceptionsVariableName:
   Exclude:
-    - 'lib/hurricane_engine/runner/shebang_runner.rb'
-
-# Offense count: 1
-# Configuration parameters: Include.
-# Include: app/controllers/**/*.rb
-Rails/LexicallyScopedActionFilter:
-  Exclude:
-    - 'app/controllers/api/flags_controller.rb'
+    - 'lib/hurricane_engine/runner/temporarily_executable.rb'
 
 # Offense count: 1
 Security/Eval:

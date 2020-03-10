@@ -4,7 +4,7 @@ module Scheduler
   def schedule
     return if down?
     unschedule
-    scheduler        = Rufus::Scheduler.singleton
+    scheduler = Rufus::Scheduler.singleton
     scheduler_handle = scheduler.every("#{period}s") do
       teams.each do |team|
         ExploitJob.perform_later(team.id, id)
@@ -16,7 +16,7 @@ module Scheduler
   def unschedule
     return if scheduler_handle.nil?
     scheduler = Rufus::Scheduler.singleton
-    job       = scheduler.job(scheduler_handle)
+    job = scheduler.job(scheduler_handle)
     job&.unschedule
     job&.kill
     update_columns(scheduler_handle: nil)
