@@ -16,20 +16,7 @@ class ApplicationDatatable < AjaxDatatablesRails::ActiveRecord
   def query_to_normal_dataset(query)
     dataset = connection.execute(query)
 
-    normalize_dataset(dataset)
-  end
-
-  def normalize_dataset(dataset)
-    reduce_dataset(dataset).first(rating_size).to_h
-  end
-
-  def reduce_dataset(dataset)
-    dataset.each_with_object({}) do |tuple, memo|
-      timestamp = Time.zone.parse(tuple["timestamp"])
-      value = tuple["value"]
-
-      memo[timestamp] = value
-    end
+    Utils.to_normal_time_based_dataset(dataset, rating_size)
   end
 
   def connection

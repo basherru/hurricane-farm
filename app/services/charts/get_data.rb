@@ -3,7 +3,7 @@
 class Charts::GetData < ApplicationService
   CHART_TYPES = %i[temporal partition].freeze
   CHART_TYPE_STRATEGY = { temporal: :line, partition: :pie }.freeze
-  CHART_ENTITIES = %i[team exploit].freeze
+  CHART_MODELS = %i[team exploit].freeze
   CHART_METRICS = %i[flags points].freeze
 
   def call
@@ -24,22 +24,20 @@ class Charts::GetData < ApplicationService
 
   def wrap(*args)
     {
-      title: wrap_title(*args),
-      data: wrap_data(*args),
+      title: compose_title(*args),
+      data: get_data(*args),
     }
   end
 
-  def wrap_title(type, entity, metric)
-    "#{type.humanize} #{entity.humanize}s Statistics (#{metric.humanize})"
+  def compose_title(type, model, metric)
+    "#{type.humanize} #{model.humanize}s Statistics (#{metric.humanize})"
   end
 
-  def wrap_data(type, entity, metric)
-    metric_accessor_name = [metric, type].join("_")
-
-    entity.camelize.constantize.public_send(metric_accessor_name)
+  def get_data(type, model, metric)
+    Charts::QueryDataset.call(type, model, metric).response
   end
 
-  memoize def charts_cartesian
-    CHART_TYPES.product(CHART_ENTITIES, CHART_METRICS)
+  def charts_cartesian
+    CHART_TYPES.product(CHART_MODELS, CHART_METRICS)
   end
 end
