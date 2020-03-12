@@ -1,51 +1,50 @@
-module Api
-  class TeamsController < ApiController
-    before_action :set_team, only: [:show, :update, :destroy]
+# frozen_string_literal: true
 
-    def index
-      @teams = Team.all
-    end
+class Api::TeamsController < ApiController
+  before_action :set_team, only: [:show, :update, :destroy]
 
-    def show
-    end
+  def index
+    @teams = Team.all
+  end
 
-    def create
-      @team = Team.new(team_params)
+  def show; end
 
-      respond_to do |format|
-        if @team.save
-          format.json { render :show, status: :created }
-        else
-          format.json { render json: @team.errors, status: :unprocessable_entity }
-        end
+  def create
+    @team = Team.new(permitted_params)
+
+    respond_to do |format|
+      if @team.save
+        format.json { render :show, status: :created }
+      else
+        format.json { render json: @team.errors, status: :unprocessable_entity }
       end
     end
+  end
 
-    def update
-      respond_to do |format|
-        if @team.update(team_params)
-          format.json { render :show, status: :ok }
-        else
-          format.json { render json: @team.errors, status: :unprocessable_entity }
-        end
+  def update
+    respond_to do |format|
+      if @team.update(permitted_params)
+        format.json { render :show, status: :ok }
+      else
+        format.json { render json: @team.errors, status: :unprocessable_entity }
       end
     end
+  end
 
-    def destroy
-      @team.destroy
-      respond_to do |format|
-        format.json { head :no_content }
-      end
+  def destroy
+    @team.destroy!
+    respond_to do |format|
+      format.json { head :no_content }
     end
+  end
 
-    private
+  private
 
-    def set_team
-      @team = Team.find(params[:id])
-    end
+  def set_team
+    @team = Team.find(params[:id])
+  end
 
-    def team_params
-      params.fetch(:team, {}).permit(:host, :title, :status)
-    end
+  def permitted_params
+    params.fetch(:team, {}).permit(:host, :title, :status)
   end
 end

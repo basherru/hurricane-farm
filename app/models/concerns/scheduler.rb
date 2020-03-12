@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Scheduler
   extend ActiveSupport::Concern
 
@@ -22,5 +24,5 @@ module Scheduler
     update_columns(scheduler_handle: nil)
   end
 
-  alias :reschedule :schedule
+  alias reschedule schedule
 end

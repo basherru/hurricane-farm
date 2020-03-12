@@ -207,15 +207,25 @@ GEM
     redis (4.1.3)
     regexp_parser (1.7.0)
     require_all (3.0.0)
-    rexml (3.2.4)
-    rubocop (0.80.1)
+    rubocop (0.79.0)
       jaro_winkler (~> 1.5.1)
       parallel (~> 1.10)
       parser (>= 2.7.0.1)
       rainbow (>= 2.2.2, < 4.0)
-      rexml
       ruby-progressbar (~> 1.7)
       unicode-display_width (>= 1.4.0, < 1.7)
+    rubocop-config-umbrellio (0.79.0.68)
+      rubocop (= 0.79.0)
+      rubocop-performance (= 1.5.2)
+      rubocop-rails (= 2.4.1)
+      rubocop-rspec (= 1.37.1)
+    rubocop-performance (1.5.2)
+      rubocop (>= 0.71.0)
+    rubocop-rails (2.4.1)
+      rack (>= 1.1)
+      rubocop (>= 0.72.0)
+    rubocop-rspec (1.37.1)
+      rubocop (>= 0.68.1)
     ruby-progressbar (1.10.1)
     ruby2_keywords (0.0.2)
     ruby_dep (1.5.0)
@@ -321,6 +331,8 @@ DEPENDENCIES
   rails (~> 5.2.3)
   rails_best_practices (~> 1.19)
   rubocop
+  rubocop-config-umbrellio
+  rubocop-rspec
   rufus-scheduler (~> 3.6)
   sass-rails (~> 5.0)
   selenium-webdriver

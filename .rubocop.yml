@@ -1,131 +1,16 @@
-inherit_from: .rubocop_todo.yml
-
-# require: rubocop-rspec
+inherit_gem:
+  rubocop-config-umbrellio: lib/rubocop.rails.yml
 
 AllCops:
-  DisplayCopNames: true
-  StyleGuideCopsOnly: false
   TargetRubyVersion: 2.7
+
+Layout/LineLength:
   Exclude:
-    - db/**/*
-    - script/**/*
-    - bin/**/*
-    - vendor/**/*
-    - docker/**/*
-    - tmp/**/*
-    - docker/**/*
-    - spec/fixtures/**/*
-    - config/initializers/**/*
-    - config/environments/**/*
-    - config/application.rb
-    - ./Gemfile
-    - ./Rakefile
-    - ./config.ru
-    - ./node_modules/**/*
-    - csv_reports/**/*
+    - Gemfile
+    - Gemfile.lock
+    - db/schema.rb
 
-Rails/UnknownEnv:
-  Environments:
-  - production
-  - staging
-  - development
-  - test
-
-Rails:
-  Enabled: true
-
-Rails/HasManyOrHasOneDependent:
-  Enabled: false
-
-Rails/SkipsModelValidations:
-  Enabled: false
-
-Rails/HasAndBelongsToMany:
-  Enabled: false
-
-Rails/InverseOf:
-  Enabled: false
-
-Documentation:
-  Enabled: false
-
-Layout/TrailingBlankLines:
-  Enabled: false
-
-Layout/MultilineBlockLayout:
+Security/Eval:
   Exclude:
-    - spec/**/*
-
-Layout/IndentFirstHashElement:
-  Exclude:
-    - spec/**/*
-
-Style/StringLiterals:
-  Enabled: false
-
-Style/FrozenStringLiteralComment:
-  Enabled: false
-
-Style/ClassAndModuleChildren:
-  Enabled: false
-
-Style/MultilineBlockChain:
-  Enabled: false
-
-Style/BlockDelimiters:
-  Exclude:
-    - spec/**/*
-
-Style/MixinUsage:
-  Exclude:
-    - spec/**/*
-
-Style/StructInheritance:
-  Enabled: false
-
-Style/ParallelAssignment:
-  Enabled: false
-
-Style/RescueModifier:
-  Enabled: false
-
-Style/PercentLiteralDelimiters:
-  PreferredDelimiters:
-    default: ()
-    '%i':   '[]'
-    '%I':   '[]'
-    '%r':   '{}'
-    '%w':   '[]'
-    '%W':   '[]'
-
-Style/FormatStringToken:
-  Enabled: false
-
-Lint/AmbiguousBlockAssociation:
-  Enabled: false
-
-Metrics/AbcSize:
-  Enabled: false
-
-Metrics/LineLength:
-  Enabled: true
-  Max: 120
-  Exclude:
-    - spec/**/*
-    - features/**/*
-
-Metrics/MethodLength:
-  Enabled: true
-  Max: 20
-  Exclude:
-    - spec/**/*
-
-Metrics/BlockLength:
-  Exclude:
-    - spec/**/*
-    - lib/tasks/**/*
-    - app/models/concerns/sc/plan_group_methods.rb
-
-Metrics/ClassLength:
-  Exclude:
-    - app/services/sc/prices/updater.rb
+    - lib/tasks/**/*.rake
+    - config/initializers/configurable.rb

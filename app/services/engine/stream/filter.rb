@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Engine::Stream::Filter < ApplicationService
   struct :stream
   delegate :flag_format, to: :config

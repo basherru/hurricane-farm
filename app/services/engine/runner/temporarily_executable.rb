@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Engine::Runner::TemporarilyExecutable < ApplicationService
   struct :team, :exploit
   attr_accessor :pid, :stdout

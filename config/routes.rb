@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
   resources :users
-  root 'home#index'
+  root "home#index"
 
   namespace :api do
     resources :teams, only: %i[index show create update destroy]

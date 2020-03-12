@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Charts::GetData < ApplicationService
   CHART_TYPES = %i[temporal partition].freeze
   CHART_TYPE_STRATEGY = { temporal: :line, partition: :pie }.freeze
@@ -12,7 +14,7 @@ class Charts::GetData < ApplicationService
 
   def charts_data
     charts_cartesian.each_with_object({}) do |args, data|
-      type, _, _ = args
+      type, = args
       strategy = CHART_TYPE_STRATEGY.fetch(type)
       bucket = "#{strategy}_charts".to_sym
 

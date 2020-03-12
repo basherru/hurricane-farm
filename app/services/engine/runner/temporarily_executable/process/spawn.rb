@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Engine::Runner::TemporarilyExecutable::Process::Spawn < ApplicationService
   struct :team, :exploit
 
@@ -11,8 +13,8 @@ class Engine::Runner::TemporarilyExecutable::Process::Spawn < ApplicationService
     stdout, _, pid = PTY.spawn(start_cmd)
 
     { pid: pid, stdout: stdout }
-  rescue PTY::ChildExited => e
-    logger.warn("Failed to spawn process: #{e.message}")
+  rescue PTY::ChildExited => error
+    logger.warn("Failed to spawn process: #{error.message}")
   end
 
   def start_cmd

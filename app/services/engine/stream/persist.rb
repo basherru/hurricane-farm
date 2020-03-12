@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Engine::Stream::Persist < ApplicationService
   struct :team, :exploit, :stream
 

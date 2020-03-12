@@ -1,31 +1,25 @@
-module Api
-  class FlagsController < ApiController
-    before_action :set_flag, only: [:show]
+# frozen_string_literal: true
 
-    def index
-      @flags = Flag.all
-    end
+class Api::FlagsController < ApiController
+  def index
+    @flags = Flag.all
+  end
 
-    def create
-      @flag = Flag.new(flag_params)
+  def create
+    @flag = Flag.new(permitted_params)
 
-      respond_to do |format|
-        if @flag.save
-          format.json { render :show, status: :created }
-        else
-          format.json { render json: @flag.errors, status: :unprocessable_entity }
-        end
+    respond_to do |format|
+      if @flag.save
+        format.json { render :show, status: :created }
+      else
+        format.json { render json: @flag.errors, status: :unprocessable_entity }
       end
     end
+  end
 
-    private
+  private
 
-    def set_flag
-      @flag = Flag.find(params[:id])
-    end
-
-    def flag_params
-      params.fetch(:flag, {}).permit(:content)
-    end
+  def permitted_params
+    params.fetch(:flag, {}).permit(:content)
   end
 end

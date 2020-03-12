@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Engine::Runner::TemporarilyExecutable::Process::Watch < ApplicationService
   struct :pid, :exploit
 
@@ -13,8 +15,8 @@ class Engine::Runner::TemporarilyExecutable::Process::Watch < ApplicationService
 
   def watch_timeout!
     Timeout.timeout(exploit.timeout) { Process.wait(pid) }
-  rescue Timeout::Error => _
+  rescue Timeout::Error => _error
     logger.warn("Exploit #{exploit.title}: process timeout")
-    Process.kill('TERM', pid)
+    Process.kill("TERM", pid)
   end
 end
