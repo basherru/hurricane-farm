@@ -32,7 +32,7 @@ class Charts::QueryDataset::Temporal < Charts::QueryDataset
     Queries::GroupByMinutes.call(
       :flags,
       aggregation: aggregation,
-      conditions: { model_id => record.id }
+      conditions: { model_id => record.id },
     ).response
   end
 end
