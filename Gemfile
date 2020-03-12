@@ -53,6 +53,7 @@ group :development do
   gem "rubocop-rspec"
   gem "spring"
   gem "spring-watcher-listen", "~> 2.0.0"
+  gem "pry", "~> 0.12.2"
 end
 
 group :test do

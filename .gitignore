@@ -9,6 +9,7 @@ capybara-*.html
 *.orig
 .DS_Store
 rerun.txt
+logfile
 pickle-email-*.html
 
 # Ignore .idea folders and files

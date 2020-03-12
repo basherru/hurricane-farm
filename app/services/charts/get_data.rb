@@ -24,7 +24,7 @@ class Charts::GetData < ApplicationService
 
   def wrap(*args)
     {
-      title: compose_title(*args),
+      title: compose_title(*args.map(&:to_s)),
       data: get_data(*args),
     }
   end

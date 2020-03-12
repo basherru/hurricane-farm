@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Charts::QueryDataset::Temporal::Flags < ApplicationService
+class Charts::QueryDataset::Temporal::Team < Charts::QueryDataset::Temporal
   private
 
   def model_dataset

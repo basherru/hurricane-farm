@@ -21,7 +21,7 @@ class Charts::QueryDataset::Temporal < Charts::QueryDataset
   end
 
   memoize def model
-    super.camelize.constantize
+    Utils.get_class(super)
   end
 
   memoize def model_id
