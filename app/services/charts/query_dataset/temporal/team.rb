@@ -6,8 +6,4 @@ class Charts::QueryDataset::Temporal::Team < Charts::QueryDataset::Temporal
   def model_dataset
     model.all.sort_by { |record| -record.flags.count }.first(rating_size)
   end
-
-  def aggregation
-    { function: :count, column: "1" }
-  end
 end

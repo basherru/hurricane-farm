@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Charts::QueryDataset::Partition::Points < Charts::QueryDataset::Partition
+class Charts::QueryDataset::Partition::Team < Charts::QueryDataset::Partition
   private
 
   def dataset

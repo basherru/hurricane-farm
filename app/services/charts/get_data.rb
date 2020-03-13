@@ -18,7 +18,7 @@ class Charts::GetData < ApplicationService
       strategy = CHART_TYPE_STRATEGY.fetch(type)
       bucket = "#{strategy}_charts".to_sym
 
-      data[bucket] = wrap(*args)
+      data[bucket] = [*data[bucket], wrap(*args)]
     end
   end
 

@@ -2,6 +2,6 @@
 
 class HomeController < UiController
   def index
-    @charts = Charts::GetData.call
+    @charts = Charts::GetData.call.response
   end
 end

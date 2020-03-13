@@ -2,7 +2,6 @@
 
 class Queries::GroupByMinutes < ApplicationService
   struct :table_name, :options
-  param :minutes_count, :aggregation, :conditions
 
   DEFAULT_MINUTES_COUNT = 1
   DEFAULT_AGGREGATION = { function: :count, column: "1" }.freeze
@@ -39,7 +38,7 @@ class Queries::GroupByMinutes < ApplicationService
 
   def rounded_timestamp_clause
     <<-SQL
-      date_trunc('hour', created_at) + ((round_clause) || ' minutes')::interval AS timestamp
+      date_trunc('hour', created_at) + ((#{round_clause}) || ' minutes')::interval AS timestamp
     SQL
   end
 
@@ -64,14 +63,14 @@ class Queries::GroupByMinutes < ApplicationService
   end
 
   memoize def minutes_count
-    super || DEFAULT_MINUTES_COUNT
+    options.fetch(:minutes_count, DEFAULT_MINUTES_COUNT)
   end
 
   memoize def aggregation
-    super || DEFAULT_AGGREGATION
+    options.fetch(:aggregation, DEFAULT_AGGREGATION)
   end
 
   memoize def conditions
-    super || DEFAULT_CONDITIONS
+    options.fetch(:conditions, DEFAULT_CONDITIONS)
   end
 end

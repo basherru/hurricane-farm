@@ -4,6 +4,10 @@ class Charts::QueryDataset::Temporal < Charts::QueryDataset
   builds { |_, model, _| Utils.get_class(name, model) }
 
   DEFAULT_TITLE = "Unknown"
+  AGGREGATIONS = {
+    points: { function: :sum, column: :pts },
+    flags: { function: :count, column: "1" },
+  }.freeze
 
   private
 
@@ -16,8 +20,16 @@ class Charts::QueryDataset::Temporal < Charts::QueryDataset
   def wrap(record)
     {
       name: record.title || DEFAULT_TITLE,
-      data: Utils.to_normal_time_based_dataset(query_for(record), rating_size),
+      data: Utils.to_normal_time_based_dataset(dataset_for(record), rating_size),
     }
+  end
+
+  def dataset_for(record)
+    connection.execute(query_for(record))
+  end
+
+  def aggregation
+    AGGREGATIONS.fetch(metric)
   end
 
   memoize def model
@@ -25,7 +37,7 @@ class Charts::QueryDataset::Temporal < Charts::QueryDataset
   end
 
   memoize def model_id
-    "#{model.name}_id"
+    "#{model.name.downcase}_id"
   end
 
   def query_for(record)
