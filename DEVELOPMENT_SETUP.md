@@ -3,8 +3,8 @@
 1. Install and select Ruby 2.6+ via RVM or your ruby version manager of choice.
 
     ```bash
-    rvm install 2.7.0
-    rvm use 2.7.0
+    rvm install 2.6.5
+    rvm use 2.6.5
     ```
   
 2. Install and configure PostgresQL database.

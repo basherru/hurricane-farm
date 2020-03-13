@@ -2,7 +2,7 @@
 
 class Engine::Runner::TemporarilyExecutable < ApplicationService
   struct :team, :exploit
-  attr_accessor :pid, :stdout
+  attr_accessor :path, :pid, :stdout
 
   def call
     success! process!
@@ -19,11 +19,11 @@ class Engine::Runner::TemporarilyExecutable < ApplicationService
   def spawn_process!
     response = Engine::Runner::TemporarilyExecutable::Process::Spawn.call(team, exploit).response
 
-    self.pid, self.stdout = response.values_at(:pid, :stdout)
+    self.path, self.pid, self.stdout = response.values_at(:path, :pid, :stdout)
   end
 
   def watch_process!
-    Engine::Runner::TemporarilyExecutable::Process::Watch.call(pid, exploit)
+    Engine::Runner::TemporarilyExecutable::Process::Watch.call(path, pid, exploit)
   end
 
   def persist_stream!

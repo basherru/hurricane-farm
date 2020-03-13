@@ -1,0 +1,17 @@
+#!/usr/bin/env ruby
+
+require 'socket'
+require 'securerandom'
+
+def flag
+  SecureRandom.alphanumeric(31).upcase + "="
+end
+
+TCPServer.open(3001).tap do |server|
+  loop do
+    client_connection = server.accept
+    client_connection.puts(flag)
+    puts(flag)
+    client_connection.close
+  end
+end

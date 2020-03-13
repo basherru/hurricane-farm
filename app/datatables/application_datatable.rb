@@ -4,6 +4,7 @@ class ApplicationDatatable < AjaxDatatablesRails::ActiveRecord
   include Chartkick::Helper
   include Memery
   include Rails.application.routes.url_helpers
+  include ActionView::Helpers::DateHelper
 
   private
 

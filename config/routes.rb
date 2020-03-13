@@ -13,4 +13,7 @@ Rails.application.routes.draw do
   resources :teams, except: %i[show]
   resources :exploits
   resources :flags, only: %i[index new create]
+
+  require "sidekiq/web"
+  mount Sidekiq::Web => "/sidekiq"
 end

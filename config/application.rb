@@ -21,5 +21,6 @@ module HurricaneFarm
   class Application < Rails::Application
     config.load_defaults 5.2
     config.eager_load_paths << Rails.root.join("app/services")
+    config.active_job.queue_adapter = :sidekiq
   end
 end

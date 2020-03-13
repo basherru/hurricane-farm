@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Engine::Runner::TemporarilyExecutable::Process::Watch < ApplicationService
-  struct :pid, :exploit
+  struct :path, :pid, :exploit
 
   def call
     success! watch_process!
@@ -15,8 +15,20 @@ class Engine::Runner::TemporarilyExecutable::Process::Watch < ApplicationService
 
   def watch_timeout!
     Timeout.timeout(exploit.timeout) { Process.wait(pid) }
-  rescue Timeout::Error => _error
+  ensure
+    try_kill_process!
+    try_delete_executable!
+  end
+
+  def try_delete_executable!
+    FileUtils.remove_file(path) rescue nil
+  end
+
+  def try_kill_process!
+    Process.kill("TERM", pid) rescue nil
+  end
+
+  def log_timeout!
     logger.warn("Exploit #{exploit.title}: process timeout")
-    Process.kill("TERM", pid)
   end
 end

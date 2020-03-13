@@ -69,9 +69,6 @@ class TeamsController < ApplicationController
   end
 
   def sync_exploits
-    @team.exploits = []
-    permitted_params[:exploit_ids].select(&:present?).each do |id|
-      @team.exploits << Exploit.find(id)
-    end
+    permitted_params.fetch(:exploit_ids, []).map { |id| @team.exploits << Exploit.find(id) }
   end
 end

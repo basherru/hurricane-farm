@@ -8,7 +8,7 @@ module Utils
   end
 
   def with_numeric_status(params)
-    params.map { |k, v| [k, k == :status ? to_numeric(v) : v] }.to_h
+    params.to_h.map { |k, v| [k, k == :status ? to_numeric(v) : v] }.to_h
   end
 
   def get_class(*args)
