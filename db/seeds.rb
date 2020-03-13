@@ -19,7 +19,7 @@ def create_flags!(count: 5000)
       exploit: Exploit.all.sample,
       content: SecureRandom.base58(31).upcase + "=",
       pts: rand * 100,
-      created_at: rand(8.hour).seconds.ago,
+      created_at: rand(8.hours).seconds.ago,
     )
   end
 end

@@ -1,13 +1,9 @@
 # frozen_string_literal: true
 
 class Charts::QueryDataset::Temporal < Charts::QueryDataset
-  builds { |_, model, _| Utils.get_class(name, model) }
+  builds { |_, _, metric| Utils.get_class(name, metric) }
 
   DEFAULT_TITLE = "Unknown"
-  AGGREGATIONS = {
-    points: { function: :sum, column: :pts },
-    flags: { function: :count, column: "1" },
-  }.freeze
 
   private
 
@@ -28,10 +24,6 @@ class Charts::QueryDataset::Temporal < Charts::QueryDataset
     connection.execute(query_for(record))
   end
 
-  def aggregation
-    AGGREGATIONS.fetch(metric)
-  end
-
   memoize def model
     Utils.get_class(super)
   end
@@ -43,6 +35,7 @@ class Charts::QueryDataset::Temporal < Charts::QueryDataset
   def query_for(record)
     Queries::GroupByMinutes.call(
       :flags,
+      minutes_count: 10,
       aggregation: aggregation,
       conditions: { model_id => record.id },
     ).response

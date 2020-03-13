@@ -3,6 +3,10 @@ inherit_gem:
 
 AllCops:
   TargetRubyVersion: 2.7
+  Exclude:
+    - Gemfile.lock
+    - db/schema.rb
+    - bin/*
 
 Layout/LineLength:
   Exclude:
