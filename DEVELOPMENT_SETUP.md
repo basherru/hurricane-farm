@@ -7,18 +7,20 @@
     rvm use 2.6.5
     ```
   
-2. Install and configure PostgresQL database.
+2. Install and configure PostgresQL database. Mind to allow external connections if you want to parallel run exploits in the network.
 
     ```bash
     brew install postgresql
     brew services start postgresql
+   ...
     ```
 
-3. Install and configure Redis server.
+3. Install and configure Redis server. Mind to allow external connections if you want to parallel run exploits in the network.
 
     ```bash
     brew install redis
-    brew services start redis-server
+    brew services start redis
+   ...
     ```
 
 4. Copy `.env` file from example and set all needed variables:
