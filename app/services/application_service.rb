@@ -7,4 +7,8 @@ class ApplicationService < Polist::Service
 
   delegate :config, to: App
   delegate :logger, to: Rails
+
+  class << self
+    delegate :config, to: App
+  end
 end

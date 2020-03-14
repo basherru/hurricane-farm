@@ -7,5 +7,5 @@ class Flag < ApplicationRecord
   validates :content, :pts, presence: true
   validates :content, uniqueness: true
 
-  enum status: { initial: 0, enqueued: 1, already_posted: 2, too_old: 3, our_own: 4, accepted: 5 }
+  enum status: { initial: 0, accepted: 1, already_posted: 2, too_old: 3, our_own: 4 }
 end

@@ -11,6 +11,7 @@ capybara-*.html
 rerun.txt
 logfile
 pickle-email-*.html
+/exploits
 
 # Ignore .idea folders and files
 /.idea

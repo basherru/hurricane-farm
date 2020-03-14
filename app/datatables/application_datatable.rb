@@ -25,6 +25,6 @@ class ApplicationDatatable < AjaxDatatablesRails::ActiveRecord
   end
 
   memoize def rating_size
-    App.config.datatable_rating_size
+    config.datatable_rating_size
   end
 end

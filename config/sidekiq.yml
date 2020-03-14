@@ -2,3 +2,4 @@
 :concurrency: 10
 :queues:
   - ["exploits", 10]
+  - ["submits", 1]

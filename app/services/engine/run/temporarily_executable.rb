@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Engine::Runner::TemporarilyExecutable < ApplicationService
+class Engine::Run::TemporarilyExecutable < ApplicationService
   struct :team, :exploit
   attr_accessor :path, :pid, :stdout
 
@@ -17,13 +17,13 @@ class Engine::Runner::TemporarilyExecutable < ApplicationService
   end
 
   def spawn_process!
-    response = Engine::Runner::TemporarilyExecutable::Process::Spawn.call(team, exploit).response
+    response = Engine::Run::TemporarilyExecutable::Process::Spawn.call(team, exploit).response
 
     self.path, self.pid, self.stdout = response.values_at(:path, :pid, :stdout)
   end
 
   def watch_process!
-    Engine::Runner::TemporarilyExecutable::Process::Watch.call(path, pid, exploit)
+    Engine::Run::TemporarilyExecutable::Process::Watch.call(path, pid, exploit)
   end
 
   def persist_stream!

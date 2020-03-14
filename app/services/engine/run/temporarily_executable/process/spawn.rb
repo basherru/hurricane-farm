@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Engine::Runner::TemporarilyExecutable::Process::Spawn < ApplicationService
+class Engine::Run::TemporarilyExecutable::Process::Spawn < ApplicationService
   struct :team, :exploit
 
   def call

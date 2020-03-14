@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Engine::Runner::TemporarilyExecutable::Process::Watch < ApplicationService
+class Engine::Run::TemporarilyExecutable::Process::Watch < ApplicationService
   struct :path, :pid, :exploit
 
   def call

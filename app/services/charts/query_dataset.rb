@@ -14,7 +14,7 @@ class Charts::QueryDataset < ApplicationService
   # @!method dataset, model
 
   memoize def rating_size
-    App.config.datatable_rating_size
+    config.datatable_rating_size
   end
 
   def connection
