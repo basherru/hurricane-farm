@@ -8,13 +8,13 @@ class Engine::Submit::Process::RuctfTcp < Engine::Submit::Process
   private
 
   def prepare!
-    Timeout.timeout { socket.recv_nonblock(READ_AT_ONCE) }
+    Timeout.timeout(check_system_recv_timeout) { socket.recv_nonblock(READ_AT_ONCE) }
   rescue IO::WaitReadable
   end
 
   def submit!
-    send!
-    self.response = socket.recv_nonblock(READ_AT_ONCE)
+    send_flag!
+    receive_response!
     update_flag!
   rescue IO::WaitReadable
     retry
@@ -24,12 +24,17 @@ class Engine::Submit::Process::RuctfTcp < Engine::Submit::Process
     socket.close
   end
 
-  def send!
-    Timeout.timeout(check_system_send_timeout) { socket.send(current_flag.content) }
+  def send_flag!
+    Timeout.timeout(check_system_send_timeout) { socket.puts(current_flag.content) }
+  end
+
+  def receive_response!
+    self.response =
+      Timeout.timeout(check_system_recv_timeout) { socket.recv_nonblock(READ_AT_ONCE) }
   end
 
   def update_flag!
-    return if current_flag.status != status
+    return if current_flag.status == status
 
     current_flag.update!(status: status, pts: pts)
   end
@@ -50,7 +55,7 @@ class Engine::Submit::Process::RuctfTcp < Engine::Submit::Process
   end
 
   def pts
-    response[/\d+[.,]\d+/].to_i
+    response[/\d+[.,]\d+/].to_f
   end
 
   memoize def socket

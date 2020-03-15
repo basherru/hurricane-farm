@@ -1,0 +1,44 @@
+#!/usr/bin/env ruby
+
+require 'socket'
+require 'timeout'
+
+def random_pts
+  rand * 100.0
+end
+
+def random_response
+  too_old = "sorry this flag is too old"
+  your_own = "sorry this flag is your own"
+  already_accepted = "excuse me but this flag was already posted"
+  accepted = "flag accepted! pts: #{random_pts} gz man"
+
+  [too_old, your_own, already_accepted] + [accepted] * 10
+end
+
+def communicate_with(client_connection)
+  client_connection.puts "Hi"
+  puts "Hi"
+  client_connection.puts "I am check system"
+  puts "I am check system"
+  client_connection.puts "Please, submit your flags"
+  puts "Please, submit your flags"
+  loop do
+    flag = client_connection.gets
+    puts flag if flag && flag.match?(/[A-Z0-9]{31}=/)
+    client_connection.puts "flag accepted! pts: 27.77 gz man" if flag && flag.match?(/[A-Z0-9]{31}=/)
+    puts "flag accepted! pts: 27.77 gz man" if flag && flag.match?(/[A-Z0-9]{31}=/)
+  end
+end
+
+def wrap_routine_with(client_connection)
+  Timeout.timeout(5) { communicate_with(client_connection) } rescue nil
+end
+
+TCPServer.open(3002).tap do |server|
+  connections = []
+  loop do
+    client_connection = server.accept
+    connections << Thread.new { wrap_routine_with(client_connection) }
+  end
+end

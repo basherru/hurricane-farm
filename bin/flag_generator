@@ -10,8 +10,9 @@ end
 TCPServer.open(3001).tap do |server|
   loop do
     client_connection = server.accept
-    client_connection.puts(flag)
-    puts(flag)
+    rnd_flag = flag
+    client_connection.puts(rnd_flag)
+    puts(rnd_flag)
     client_connection.close
   end
 end

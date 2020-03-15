@@ -9,6 +9,8 @@ class Engine::Submit::Process < ApplicationService
            :check_system_connect_timeout,
            :check_system_send_timeout,
            :check_system_recv_timeout,
+           :check_system_max_batch_size,
+           :check_system_submit_ttl,
            to: :config
 
   def call
@@ -24,16 +26,30 @@ class Engine::Submit::Process < ApplicationService
   def finalize!; end
 
   def process!
+    return if flags.none?
+
     prepare!
-    flags.each do |flag|
-      self.current_flag = flag
-      submit!
-    end
+    submit_many!
   ensure
     finalize!
   end
 
-  memoize def flags
-    Flag.initial
+  def submit_many!
+    flags.each do |flag|
+      self.current_flag = flag
+      submit!
+    end
+  end
+
+  def flags
+    Flag
+      .initial
+      .where(created_at: ttl_range)
+      .order(created_at: :desc)
+      .take(check_system_max_batch_size)
+  end
+
+  def ttl_range
+    Range.new(check_system_submit_ttl.seconds.ago, Time.current)
   end
 end
