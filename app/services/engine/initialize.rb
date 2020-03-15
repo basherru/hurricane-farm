@@ -1,23 +1,28 @@
 # frozen_string_literal: true
 
-class Engine::Reset < ApplicationService
+class Engine::Initialize < ApplicationService
   def call
-    success! reset!
+    success! initialize!
   end
 
   private
 
-  def reset!
-    reset_schedules!
-    reset_queues!
+  def initialize!
+    initialize_schedules!
+    initialize_queues!
+    initialize_submit_loop!
   end
 
-  def reset_schedules!
+  def initialize_schedules!
     exploits.each { |exploit| Engine::Exploit::AfterSave.call(exploit) }
   end
 
-  def reset_queues!
+  def initialize_queues!
     queues.map(&:new).each(&:clear)
+  end
+
+  def initialize_submit_loop!
+    Engine::Submit::Loop.call
   end
 
   def exploits
