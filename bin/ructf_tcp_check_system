@@ -13,7 +13,7 @@ def random_response
   already_accepted = "excuse me but this flag was already posted"
   accepted = "flag accepted! pts: #{random_pts} gz man"
 
-  [too_old, your_own, already_accepted] + [accepted] * 10
+  [[too_old, your_own, already_accepted] + [accepted] * 10].flatten.sample
 end
 
 def communicate_with(client_connection)
@@ -25,9 +25,10 @@ def communicate_with(client_connection)
   puts "Please, submit your flags"
   loop do
     flag = client_connection.gets
+    response = random_response
     puts flag if flag && flag.match?(/[A-Z0-9]{31}=/)
-    client_connection.puts "flag accepted! pts: 27.77 gz man" if flag && flag.match?(/[A-Z0-9]{31}=/)
-    puts "flag accepted! pts: 27.77 gz man" if flag && flag.match?(/[A-Z0-9]{31}=/)
+    client_connection.puts response if flag && flag.match?(/[A-Z0-9]{31}=/)
+    puts response if flag && flag.match?(/[A-Z0-9]{31}=/)
   end
 end
 
