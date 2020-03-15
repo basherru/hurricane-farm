@@ -16,8 +16,6 @@ class Engine::Submit::Process::RuctfTcp < Engine::Submit::Process
     send_flag!
     receive_response!
     update_flag!
-  rescue IO::WaitReadable
-    retry
   end
 
   def finalize

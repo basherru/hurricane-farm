@@ -7,4 +7,8 @@ class Team < ApplicationRecord
   validates :title, :host, presence: true
 
   enum status: { down: 0, up: 1 }
+
+  after_save do
+    exploits.each { |exploit| Engine::Exploit::AfterSave.call(exploit) }
+  end
 end

@@ -5,10 +5,14 @@ class Engine::Stream::Filter < ApplicationService
   delegate :flag_format, to: :config
 
   def call
-    success!(filtered_entries)
+    success!(unique_filtered_entries)
   end
 
   private
+
+  def unique_filtered_entries
+    filtered_entries.uniq
+  end
 
   def filtered_entries
     stream.flat_map { |line| line.scan(flag_format) } rescue []

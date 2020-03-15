@@ -1,5 +1,5 @@
 :verbose: false
 :concurrency: 10
 :queues:
-  - ["exploits", 10]
+  - ["exploits", 100]
   - ["submits", 1]
