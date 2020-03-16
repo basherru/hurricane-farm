@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Engine::Submit::Process::RuctfTcp < Engine::Submit::Process
+class Engine::Submit::Process::Tcp < Engine::Submit::Process
   READ_AT_ONCE = 1024
 
   attr_accessor :response
@@ -8,7 +8,9 @@ class Engine::Submit::Process::RuctfTcp < Engine::Submit::Process
   private
 
   def prepare!
-    Timeout.timeout(check_system_recv_timeout) { socket.recv_nonblock(READ_AT_ONCE) }
+    read_all_void!
+    send_token!
+    read_all_void!
   rescue IO::WaitReadable
   end
 
@@ -22,13 +24,21 @@ class Engine::Submit::Process::RuctfTcp < Engine::Submit::Process
     socket.close
   end
 
+  def send_token!
+    Timeout.timeout(check_system_send_timeout) { socket.puts(check_system_token) }
+  end
+
   def send_flag!
     Timeout.timeout(check_system_send_timeout) { socket.puts(current_flag.content) }
   end
 
+  def read_all_void!
+    Timeout.timeout(check_system_recv_timeout) { socket.recv(READ_AT_ONCE) }
+  end
+
   def receive_response!
     self.response =
-      Timeout.timeout(check_system_recv_timeout) { socket.recv_nonblock(READ_AT_ONCE) }
+      Timeout.timeout(check_system_recv_timeout) { socket.recv(READ_AT_ONCE) }
   end
 
   def update_flag!

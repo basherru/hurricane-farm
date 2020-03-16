@@ -8,9 +8,9 @@ class Engine::Initialize < ApplicationService
   private
 
   def initialize!
-    initialize_schedules!
-    initialize_queues!
-    initialize_submit_loop!
+    initialize_schedules! rescue nil
+    initialize_queues! rescue nil
+    initialize_submit_loop! rescue nil
   end
 
   def initialize_schedules!
@@ -18,7 +18,7 @@ class Engine::Initialize < ApplicationService
   end
 
   def initialize_queues!
-    queues.map(&:new).each(&:clear)
+    Sidekiq::Queue.all.each(&:clear)
   end
 
   def initialize_submit_loop!

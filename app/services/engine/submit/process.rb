@@ -6,6 +6,7 @@ class Engine::Submit::Process < ApplicationService
   attr_accessor :current_flag
   delegate :check_system_ip,
            :check_system_port,
+           :check_system_token,
            :check_system_connect_timeout,
            :check_system_send_timeout,
            :check_system_recv_timeout,

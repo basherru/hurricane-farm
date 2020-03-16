@@ -91,3 +91,5 @@ gem "polist", "~> 1.2"
 gem "memery", "~> 1.3"
 
 gem "activerecord-import", "~> 1.0"
+gem "ezclient"
+
