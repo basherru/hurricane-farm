@@ -73,7 +73,7 @@ gem "socketry", "~> 0.5.1"
 
 gem "ajax-datatables-rails", "~> 1.0"
 gem "bootstrap", "~> 4.3"
-gem "chartkick", "~> 3.1"
+gem "chartkick", "~> 3.4"
 gem "codemirror-rails", "~> 5.16"
 gem "groupdate", "~> 4.1"
 gem "jquery-datatables", "~> 1.10"
