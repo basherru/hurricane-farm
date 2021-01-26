@@ -5,10 +5,10 @@ class ApplicationService < Polist::Service
   include Polist::Builder
   include Memery
 
-  delegate :config, to: App
-  delegate :logger, to: Rails
-
   class << self
     delegate :config, to: App
   end
+
+  delegate :logger, to: Rails
+  delegate :config, to: :class
 end
