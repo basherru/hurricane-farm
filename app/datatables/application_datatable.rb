@@ -6,6 +6,8 @@ class ApplicationDatatable < AjaxDatatablesRails::ActiveRecord
   include Rails.application.routes.url_helpers
   include ActionView::Helpers::DateHelper
 
+  self.db_adapter = :pg
+
   private
 
   def query_to_line_chart(query)

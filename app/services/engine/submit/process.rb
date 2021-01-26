@@ -4,6 +4,7 @@ class Engine::Submit::Process < ApplicationService
   builds { Utils.get_class(name, config.check_system_protocol) }
 
   attr_accessor :current_flag
+
   delegate :check_system_ip,
            :check_system_port,
            :check_system_token,

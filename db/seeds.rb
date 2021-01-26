@@ -17,7 +17,7 @@ def create_flags!(count: 5000)
     Flag.find_or_create_by!(
       team: Team.all.sample,
       exploit: Exploit.all.sample,
-      content: SecureRandom.base58(31).upcase + "=",
+      content: `#{SecureRandom.base58(31).upcase}=`,
       pts: rand * 100,
       created_at: rand(8.hours).seconds.ago,
     )
