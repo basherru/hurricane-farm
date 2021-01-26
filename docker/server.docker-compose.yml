@@ -1,0 +1,48 @@
+version: "3.3"
+
+services:
+  postgres:
+    container_name: hurricane-postgres
+    image: postgres
+    ports:
+      - "5432:5432"
+    restart: always
+    volumes:
+      - hurricane-postgres:/var/lib/postgresql/data
+    env_file:
+      - env/postgres.env
+
+  redis:
+    container_name: hurricane-redis
+    image: redis
+    ports:
+      - "6379:6379"
+    restart: always
+    volumes:
+      - hurricane-redis:/var/lib/redis/data
+    env_file:
+      - env/redis.env
+
+  app:
+    container_name: hurricane-farm
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    ports:
+      - "3000:3000"
+    volumes:
+      - ..:/app
+    env_file:
+      - env/app.env
+    environment:
+      POSTGRES_HOST: postgres
+      POSTGRES_PORT: 5432
+      REDIS_URL: redis
+    depends_on:
+      - postgres
+      - redis
+
+volumes:
+  hurricane-postgres:
+  hurricane-redis:
