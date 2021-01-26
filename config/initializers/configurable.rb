@@ -4,7 +4,7 @@ class App
   extend Dry::Configurable
 
   setting :flag_format, eval(ENV.fetch("FLAG_FORMAT"))
-  setting :submit_interval, eval(ENV.fetch("SUBMIT_INTERVAL"))
+  setting :check_system_submit_interval, eval(ENV.fetch("CHECK_SYSTEM_SUBMIT_INTERVAL"))
   setting :check_system_protocol, ENV.fetch("CHECK_SYSTEM_PROTOCOL").downcase
   setting :check_system_ip, ENV.fetch("CHECK_SYSTEM_IP")
   setting :check_system_port, ENV.fetch("CHECK_SYSTEM_PORT").to_i

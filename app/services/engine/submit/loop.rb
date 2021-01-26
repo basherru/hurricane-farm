@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Engine::Submit::Loop < ApplicationService
-  delegate :submit_interval, to: :config
+  delegate :check_system_submit_interval, to: :config
 
   def call
     success! loop!
@@ -10,7 +10,7 @@ class Engine::Submit::Loop < ApplicationService
   private
 
   def loop!
-    scheduler.every("#{submit_interval}s") { schedule_submit! }
+    scheduler.every("#{check_system_submit_interval}s") { schedule_submit! }
   end
 
   def schedule_submit!
